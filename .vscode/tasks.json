@@ -1,0 +1,132 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "C++: build active file",
+            "command": "/usr/bin/g++",
+            "args": [
+                "${file}",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}.out",
+                "-g",
+                "-fsanitize=address,undefined",
+                "-fno-omit-frame-pointer",
+                "-D _GLIBCXX_DEBUG",
+                "-Wall",
+                "-Wextra",
+                "-std=gnu++17",
+                "-I",
+                "${workspaceFolder}/ac-library"
+            ],
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "focus": true
+            }
+        },
+        {
+            "label": "C++: test active file",
+            "type": "shell",
+            "command": "oj",
+            "args": [
+                "test",
+                "-c",
+                "${fileDirname}/${fileBasenameNoExtension}.out"
+            ],
+            "dependsOn": [
+                "C++: build active file"
+            ],
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "presentation": {
+                "focus": true
+            },
+            "options": {
+                "cwd": "${fileDirname}"
+            }
+        },
+        {
+            "label": "C++: submit active file",
+            "type": "shell",
+            "command": "oj",
+            "args": [
+                "submit",
+                "${file}"
+            ],
+            "presentation": {
+                "focus": true
+            },
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "C++: expand active file ac-library include",
+            "type": "shell",
+            "command": "python3",
+            "args": [
+                "${workspaceFolder}/ac-library/expander.py",
+                "${file}"
+            ],
+            "presentation": {
+                "focus": true
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/ac-library"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Python: test active file",
+            "type": "shell",
+            "command": "oj",
+            "args": [
+                "t",
+                "-c",
+                "python3 ${file}"
+            ],
+            "group": "test",
+            "presentation": {
+                "focus": true
+            },
+            "options": {
+                "cwd": "${fileDirname}"
+            }
+        },
+        {
+            "label": "oj: oj prepare",
+            "type": "shell",
+            "command": "oj-prepare",
+            "args": [
+                "${input:URL}",
+                ";",
+                "fish",
+                "~/.local/bin/ojopen.sh"
+            ],
+            "group": "test"
+        },
+        {
+            "label": "remove empty submit file and directory",
+            "type": "shell",
+            "command": "find . \\( -name \"*.cpp\" -o -name \"*.py\" \\) -empty -not -wholename \"*/ac-library/*\" -delete",
+            "problemMatcher": []
+        }
+    ],
+    "inputs": [
+        {
+            "id": "URL",
+            "type": "promptString",
+            "description": "Problem or Contest URL"
+            // type specific configuration attributes
+        }
+    ],
+}

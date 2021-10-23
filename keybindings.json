@@ -1,0 +1,27 @@
+// 既定値を上書きするには、このファイル内にキー バインドを挿入します
+[
+    {
+        "key": "ctrl+f13",
+        "command": "workbench.action.terminal.toggleTerminal",
+        "when": "terminal.active"
+    },
+    {
+        "key": "alt+r",
+        "command": "workbench.action.tasks.runTask",
+    },
+    {
+        "key": "alt+d",
+        "command": "workbench.action.tasks.runTask",
+        "args": "oj: oj prepare"
+    },
+    {
+        "key": "alt+t",
+        "command": "workbench.action.tasks.test",
+    },
+    {
+        "key": "alt+s",
+        "command": "workbench.action.tasks.runTask",
+        "args": "C++: submit active file",
+        "when": "editorLangId != 'markdown'"
+    }
+]

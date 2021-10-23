@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/g++",
+            "cStandard": "gnu17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "gcc-x64",
+            "compilerArgs": [
+                "-g",
+                "-Wall",
+                "-Wextra",
+                "-std=gnu++17",
+                "-I",
+                "${workspaceFolder}/ac-library"
+            ]
+        }
+    ],
+    "version": 4
+}
